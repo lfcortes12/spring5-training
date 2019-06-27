@@ -13,7 +13,6 @@ public class HomeController {
 	public String home() {
 		log.info("Executing home method ..");
 		return "home";
-
 	}
 
 }
