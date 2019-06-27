@@ -1,9 +1,12 @@
 package com.blob.demo.controller;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +23,10 @@ public class HomeControllerTest {
 	private MockMvc mockMvc;
 
 	@Test
-	public void home() throws Exception {
-		mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(header().doesNotExist("hello")).andDo(log());
+	public void requestHomeViewSuccessfully() throws Exception {
+		mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(header().doesNotExist("hello"))
+				.andExpect(view().name("home")).andExpect(content().string(containsString("Welcome to ...")))
+				.andDo(log());
 	}
 
 }
