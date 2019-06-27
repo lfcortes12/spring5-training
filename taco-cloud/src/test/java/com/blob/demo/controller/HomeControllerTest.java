@@ -29,4 +29,9 @@ public class HomeControllerTest {
 				.andDo(log());
 	}
 
+	@Test
+	public void requestHomeViewHeaderValidationSuccessfully() throws Exception {
+		mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(header().string("taco", "funny")).andDo(log());
+	}
+
 }
